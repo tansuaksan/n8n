@@ -82,7 +82,6 @@ export class ExperianApi implements INodeType {
 			};
 
 			try {
-				// Now that the options are all set make the actual http request
 				response = await this.helpers.request(accessTokenRequestOptions);
 
 				const requestOptions: OptionsWithUri = {
@@ -108,8 +107,6 @@ export class ExperianApi implements INodeType {
 
 				let errorItem;
 				if (error.response !== undefined) {
-					// Since this is a Graph API node and we already know the request was
-					// not successful, we'll go straight to the error details.
 					const experianApiErrors = error.response.body?.error ?? {};
 
 					errorItem = {
@@ -118,7 +115,6 @@ export class ExperianApi implements INodeType {
 						headers: error.response.headers,
 					};
 				} else {
-					// Unknown Graph API response, we'll dump everything in the response item
 					errorItem = error;
 				}
 				returnItems.push({json: {...errorItem}});
