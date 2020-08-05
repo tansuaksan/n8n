@@ -59,6 +59,7 @@
       "dist/credentials/FlowApi.credentials.js",
       "dist/credentials/GithubApi.credentials.js",
       "dist/credentials/GithubOAuth2Api.credentials.js",
+      "dist/credentials/ExperianApi.credentials.js",
       "dist/credentials/GitlabApi.credentials.js",
       "dist/credentials/GoogleApi.credentials.js",
       "dist/credentials/GoogleCalendarOAuth2Api.credentials.js",
@@ -199,6 +200,7 @@
       "dist/nodes/ExecuteCommand.node.js",
       "dist/nodes/ExecuteWorkflow.node.js",
       "dist/nodes/Facebook/FacebookGraphApi.node.js",
+      "dist/nodes/Experian/ExperianApi.node.js",
       "dist/nodes/FileMaker/FileMaker.node.js",
       "dist/nodes/Freshdesk/Freshdesk.node.js",
       "dist/nodes/Flow/Flow.node.js",
@@ -314,7 +316,8 @@
       "dist/nodes/Zendesk/ZendeskTrigger.node.js",
       "dist/nodes/Zoho/ZohoCrm.node.js",
       "dist/nodes/Zoom/Zoom.node.js",
-      "dist/nodes/Zulip/Zulip.node.js"
+      "dist/nodes/Zulip/Zulip.node.js",
+      "dist/nodes/Blacklist/Blacklist.node.js"
     ]
   },
   "devDependencies": {
