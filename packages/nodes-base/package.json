@@ -316,8 +316,7 @@
       "dist/nodes/Zendesk/ZendeskTrigger.node.js",
       "dist/nodes/Zoho/ZohoCrm.node.js",
       "dist/nodes/Zoom/Zoom.node.js",
-      "dist/nodes/Zulip/Zulip.node.js",
-      "dist/nodes/Blacklist/Blacklist.node.js"
+      "dist/nodes/Zulip/Zulip.node.js"
     ]
   },
   "devDependencies": {
