@@ -1,7 +1,4 @@
-import {
-	ICredentialType,
-	NodePropertyTypes,
-} from 'n8n-workflow';
+import {ICredentialType, NodePropertyTypes,} from 'n8n-workflow';
 
 
 export class ExperianApi implements ICredentialType {
@@ -23,10 +20,6 @@ export class ExperianApi implements ICredentialType {
 				{
 					name: 'Prequalification Credit Report',
 					value: '/consumerservices/prequal/v1/credit-report',
-				},
-				{
-					name: 'Prequalification Credit Score',
-					value: '/consumerservices/prequal/v1/credit-score',
 				},
 			],
 			default: 'Prequalification Credit Report',
@@ -66,13 +59,6 @@ export class ExperianApi implements ICredentialType {
 			typeOptions: {
 				password: true,
 			},
-			default: '',
-			required: true
-		},
-		{
-			displayName: 'Client Reference Id',
-			name: 'clientReferenceId',
-			type: 'string' as NodePropertyTypes,
 			default: '',
 			required: true
 		},

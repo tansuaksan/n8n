@@ -1,24 +1,18 @@
-import {
-	IExecuteFunctions,
-} from 'n8n-core';
-import {
-	INodeExecutionData,
-	INodeType,
-	INodeTypeDescription,
-} from 'n8n-workflow';
+import {IExecuteFunctions,} from 'n8n-core';
+import {INodeExecutionData, INodeType, INodeTypeDescription,} from 'n8n-workflow';
 
 import {OptionsWithUri} from 'request';
 
 export class ExperianApi implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Experian',
+		displayName: 'Experian API',
 		name: 'experianApi',
 		icon: 'file:experian.png',
 		group: ['transform'],
 		version: 1,
-		description: 'Experian',
+		description: 'Experian API',
 		defaults: {
-			name: 'Experian',
+			name: 'Experian API',
 			color: '#772244',
 		},
 		inputs: ['main'],
@@ -55,14 +49,6 @@ export class ExperianApi implements INodeType {
 				required: true,
 			},
 			{
-				displayName: 'Phone Number',
-				name: 'phone',
-				type: 'string',
-				default: '',
-				description: 'E.g.: 555-673-1001',
-				required: true,
-			},
-			{
 				displayName: 'SSN',
 				name: 'ssn',
 				type: 'string',
@@ -77,6 +63,13 @@ export class ExperianApi implements INodeType {
 				default: '',
 				description: 'Address Line1',
 				required: true,
+			},
+			{
+				displayName: 'Address Line2',
+				name: 'addressLine2',
+				type: 'string',
+				default: '',
+				description: 'Address Line2'
 			},
 			{
 				displayName: 'Address City',
@@ -118,9 +111,9 @@ export class ExperianApi implements INodeType {
 			const firstName = this.getNodeParameter('firstName', itemIndex) as string;
 			const lastName = this.getNodeParameter('lastName', itemIndex) as string;
 			const dob = this.getNodeParameter('dob', itemIndex) as string;
-			const phone = this.getNodeParameter('phone', itemIndex) as string;
 			const ssn = this.getNodeParameter('ssn', itemIndex) as string;
 			const addressLine1 = this.getNodeParameter('addressLine1', itemIndex) as string;
+			const addressLine2 = this.getNodeParameter('addressLine2', itemIndex) as string;
 			const city = this.getNodeParameter('city', itemIndex) as string;
 			const state = this.getNodeParameter('state', itemIndex) as string;
 			const zipCode = this.getNodeParameter('zipCode', itemIndex) as string;
@@ -131,7 +124,6 @@ export class ExperianApi implements INodeType {
 						"name": {
 							"lastName": lastName,
 							"firstName": firstName,
-							"middleName": ""
 						},
 						"dob": {
 							"dob": dob
@@ -139,45 +131,33 @@ export class ExperianApi implements INodeType {
 						"ssn": {
 							"ssn": ssn
 						},
-						"phone": [
-							{
-								"number": phone,
-								"type": "T"
-							}
-						],
 						"currentAddress": {
 							"line1": addressLine1,
+							"line2": addressLine2,
 							"city": city,
 							"state": state,
 							"zipCode": zipCode
 						}
 					}
 				},
+				"permissiblePurpose": {
+					"type": "3F"
+				},
 				"requestor": {
 					"subscriberCode": experianApiCredentials!.subscriberCode
 				},
 				"addOns": {
-					"summaries": {
-						"summaryType": [
-							"Auto Summary"
+					"riskModels": {
+						"modelIndicator": [
+							"V4",
+							"D1",
+							"II"
 						]
 					},
-					"staggSelect": "Y",
-					"clarityEarlyRiskScore": "Y",
-					"clarityData": {
-						"clarityAccountId": "1234567",
-						"clarityLocationId": "123456",
-						"clarityControlFileName": "test_file",
-						"clarityControlFileVersion": "1234567"
-					},
-					"renterRiskScore": "N",
-					"rentBureauData": {
-						"primaryApplRentBureauFreezePin": "1234",
-						"secondaryApplRentBureauFreezePin": "112233"
-					},
-					"fraudShield": "Y",
-					"consumerIdentCheck": {
-						"getUniqueConsumerIdentifier": "Y"
+					"summaries": {
+						"summaryType": [
+							"Profile Summary"
+						]
 					}
 				}
 			};
@@ -250,7 +230,6 @@ export class ExperianApi implements INodeType {
 
 			returnItems.push({json: response});
 		}
-
 
 
 		return [returnItems];
